@@ -1,9 +1,31 @@
 package br.com.fundatec.carro.model;
 
+import java.time.LocalDate;
+
 public class Carro {
     private Long id;
     private String nome;
     private String placa;
+    private LocalDate dataFabricacao;
+    private LocalDate dataModelo;
+
+    public LocalDate getDataFabricacao() {
+        return dataFabricacao;
+    }
+
+    public void setDataFabricacao(LocalDate dataFabricacao) {
+        this.dataFabricacao = dataFabricacao;
+    }
+
+    public LocalDate getDataModelo() {
+        return dataModelo;
+    }
+
+    public void setDataModelo(LocalDate dataModelo) {
+        this.dataModelo = dataModelo;
+    }
+
+
 
     public Carro(Long id, String nome, String placa) {
         this.id = id;
