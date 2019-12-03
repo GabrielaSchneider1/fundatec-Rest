@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -53,7 +54,7 @@ public class CarroApi {
     }
 
     @PostMapping("/carros")
-    public ResponseEntity<CarroOutputDto> incluir(@RequestBody CarroInputDto carroInputDto){
+    public ResponseEntity<CarroOutputDto> incluir(@Valid @RequestBody CarroInputDto carroInputDto){
         Carro carro = carroMapper.mapear(carroInputDto);
         carro = carroService.incluir(carro);
         CarroOutputDto carroOutputDto = carroMapper.mapear(carro);
