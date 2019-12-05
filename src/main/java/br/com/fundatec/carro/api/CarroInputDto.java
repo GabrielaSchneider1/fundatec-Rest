@@ -1,9 +1,6 @@
 package br.com.fundatec.carro.api;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class CarroInputDto {
@@ -14,6 +11,19 @@ public class CarroInputDto {
     @Pattern(regexp = "^[A-Z]{3}[0-9]{4}$", message = "Placa inválida")
     @NotBlank(message = "O campo placa é obrigatório")
     private String placa;
+
+    @Past(message = "Data de fabricação deve ser no passado")
+    @NotNull(message = "O campo Data de fabricação é obrigatório")
+    private LocalDate dataFabricacao;
+
+    @NotNull(message = "O campo Data do modelo é obrigatório")
+    private LocalDate dataModelo;
+
+    @NotEmpty(message = "O campo marca é obrigatório")
+    private String marca;
+
+
+
 
     public LocalDate getDataFabricacao() {
         return dataFabricacao;
@@ -31,12 +41,6 @@ public class CarroInputDto {
         this.dataModelo = dataModelo;
     }
 
-    @Past(message = "Data de fabricação deve ser no passado")
-    @NotNull(message = "O campo Data de fabricação é obrigatório")
-    private LocalDate dataFabricacao;
-
-    @NotNull(message = "O campo Data do modelo é obrigatório")
-    private LocalDate dataModelo;
 
     public String getNome() {
         return nome;
@@ -52,5 +56,13 @@ public class CarroInputDto {
 
     public void setPlaca(String placa) {
         this.placa = placa;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -26,11 +27,19 @@ public class CarroService {
         return carroRepository.consultar(id);
     }
 
-    public Carro incluir(Carro carro){
-        if (carro.getDataModelo().isBefore(carro.getDataFabricacao())) {
-
-            throw new RuntimeException("Data de fabricação deve ser menor que data do modelo");
-        }
+    public Carro incluir(Carro carro) {
+        validar(carro);
         return carroRepository.incluir(carro);
     }
+
+    private void validar(Carro carro) {
+        if (carro.getDataFabricacao().isAfter(carro.getDataModelo())) {
+            throw new RuntimeException("Data de fabricaçao nao pode " + "ser maior que data do modelo");
+        }
+        List<String> marcasValidas = Arrays.asList("Fiat", "Ford", "Volkswagen");
+        if (!marcasValidas.contains(carro.getMarca())) {
+            throw new RuntimeException("A marca " + carro.getMarca() + " é inválida.");
+        }
+    }
+
 }

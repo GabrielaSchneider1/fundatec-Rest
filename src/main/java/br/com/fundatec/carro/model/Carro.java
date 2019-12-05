@@ -8,6 +8,7 @@ public class Carro {
     private String placa;
     private LocalDate dataFabricacao;
     private LocalDate dataModelo;
+    private String marca;
 
     public LocalDate getDataFabricacao() {
         return dataFabricacao;
@@ -59,5 +60,13 @@ public class Carro {
 
     public void setPlaca(String placa) {
         this.placa = placa;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 }

@@ -54,11 +54,17 @@ public class CarroApi {
     }
 
     @PostMapping("/carros")
-    public ResponseEntity<CarroOutputDto> incluir(@Valid @RequestBody CarroInputDto carroInputDto){
+    public ResponseEntity<?> incluir(@Valid @RequestBody CarroInputDto carroInputDto){
         Carro carro = carroMapper.mapear(carroInputDto);
-        carro = carroService.incluir(carro);
-        CarroOutputDto carroOutputDto = carroMapper.mapear(carro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(carroOutputDto);
+        try {
+            carro = carroService.incluir(carro);
+            CarroOutputDto carroOutputDto = carroMapper.mapear(carro);
+            return ResponseEntity.status(HttpStatus.CREATED).body(carroOutputDto);
+        } catch (RuntimeException e) {
+         ErroDto erroDto = new ErroDto();
+         erroDto.setMensagem(e.getMessage());
+         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(erroDto);
 
+        }
     }
 }
