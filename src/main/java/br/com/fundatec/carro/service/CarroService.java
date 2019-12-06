@@ -4,6 +4,7 @@ import br.com.fundatec.carro.model.Carro;
 import br.com.fundatec.carro.repository.CarroRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class CarroService {
         return carroRepository.findByNomeContainingIgnoreCase(nome);
 
     }
+
 
     public Carro consultar(Long id) {
 
@@ -41,4 +43,7 @@ public class CarroService {
         }
     }
 
+    public List<Carro> listarCarros(LocalDate dataInicio, LocalDate dataFim) {
+        return carroRepository.findByDataFabricacaoBetween(dataInicio, dataFim);
+    }
 }
