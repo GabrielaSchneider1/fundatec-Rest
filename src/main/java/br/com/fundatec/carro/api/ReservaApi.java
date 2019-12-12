@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ReservaApi {
 
-    @PostMapping("/carros/{id}/reservas")
-    public ResponseEntity<?> incluirReserva(){
-
-    }
+//    @PostMapping("/carros/{id}/reservas")
+//    public ResponseEntity<?> incluirReserva(){
+//
+//    }
 }
