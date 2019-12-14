@@ -6,6 +6,9 @@ import br.com.fundatec.carro.api.dto.ErroDto;
 import br.com.fundatec.carro.model.Carro;
 import br.com.fundatec.carro.service.CarroService;
 import br.com.fundatec.carro.mapper.CarroMapper;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +56,12 @@ public class CarroApi {
     }
 
     @PostMapping("/carros")
+
+    @ApiOperation(value = "Faz a inclusão de um carro no banco de dados",
+            notes = "Valida se os campos obrigatórios foram preenchidos, valida se a data de fabricação é no passado, ...")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Carro incluído com sucesso", response = CarroOutputDto.class),
+    })
     public ResponseEntity<?> incluir(@Valid @RequestBody CarroInputDto carroInputDto){
         Carro carro = carroMapper.mapear(carroInputDto);
         try {
@@ -67,6 +76,7 @@ public class CarroApi {
         }
     }
     @GetMapping("/carros/datas")
+
     public ResponseEntity<List<CarroOutputDto>> listar(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim){
         List<Carro> carros = carroService.listarCarros(dataInicio, dataFim);
