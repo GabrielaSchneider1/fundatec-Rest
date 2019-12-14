@@ -77,4 +77,24 @@ public class AtualizarCarroTest {
         Assert.assertEquals("2016-10-09", carroAtualizado.getDataFabricacao().toString());
 
     }
+
+
+    @Test
+    public void deveRetornarVazioQuandoAtualizarUmCarroInexistente() {
+      RestAssured.given()
+      .accept(MediaType.APPLICATION_JSON_VALUE)
+      .contentType((MediaType.APPLICATION_JSON_VALUE))
+      .body("{" + "\"nome\": \"Chevette\",\n" +
+                      "\t\"placa\": \"IJL7145\",\n" +
+                      "\t\"dataFabricacao\": \"2016-10-09\",\n" +
+                      "\t\"dataModelo\": \"2017-10-05\",\n" +
+                      "\t\"marca\": \"Fiat\"" + "}")
+      .when()
+      .put("/carros/{id}", 456)
+      .then()
+      .statusCode(HttpStatus.NO_CONTENT.value());
+    }
+
+
+
 }
